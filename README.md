@@ -1,4 +1,4 @@
-# QA Bootcamp — Week 2
+# QA Bootcamp - Week 2
 
 ## Day 6: TypeScript basics and profile validator
 
