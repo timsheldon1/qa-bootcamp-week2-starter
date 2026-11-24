@@ -9,7 +9,8 @@ with type narrowing, and optional chaining for missing values.
 `src/profile-validator.ts` defines a `UserProfile` type and an `isNotified`
 function. It uses optional chaining (`?.`) and nullish coalescing (`??`) to read
 the notification setting safely, defaulting to `false` when settings or the
-notification flag are missing. Three sample profiles demonstrate these cases.
+notification flag are missing. Four profiles cover enabled notifications,
+missing settings, empty settings, and explicitly disabled notifications.
 
 ### How to check
 
@@ -21,7 +22,7 @@ node --experimental-strip-types src/profile-validator.ts
 ```
 
 The optional-chaining example prints `undefined`, `2000`, and `undefined`.
-The profile example prints notification results of `true`, `false`, and `false`.
+The profile example prints `true`, `false`, `false`, and `false`.
 Use the same command with any other file in `src/ts-basics/` to run that example.
 Node strips the TypeScript annotations for execution; these commands do not
 perform static type checking.

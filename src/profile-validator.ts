@@ -7,32 +7,39 @@ type UserProfile = {
   };
 };
 
-// 2. Three test users covering each edge case
-const userWithNotifications: UserProfile = {
-  id: 1,
-  username: "alice",
-  settings: {
-    notifications: true,
+// 2. Profiles cover enabled, missing, and explicitly disabled notifications
+const testUsers: UserProfile[] = [
+  {
+    id: 1,
+    username: "alice",
+    settings: {
+      notifications: true,
+    },
   },
-};
+  {
+    id: 2,
+    username: "bob",
+  },
+  {
+    id: 3,
+    username: "charlie",
+    settings: {},
+  },
+  {
+    id: 4,
+    username: "dana",
+    settings: {
+      notifications: false,
+    },
+  },
+];
 
-const userWithoutSettings: UserProfile = {
-  id: 2,
-  username: "bob",
-};
-
-const userWithEmptySettings: UserProfile = {
-  id: 3,
-  username: "charlie",
-  settings: {},
-};
-
-// 3. Safe function using optional chaining (?.) and nullish coalescing (??)
+// 3. Safely handle missing settings and notification values
 function isNotified(user: UserProfile): boolean {
   return user.settings?.notifications ?? false;
 }
 
-// 4. Print the result for each user
-console.log("User 1 (notifications set):", isNotified(userWithNotifications)); // true
-console.log("User 2 (no settings):", isNotified(userWithoutSettings)); // false
-console.log("User 3 (empty settings):", isNotified(userWithEmptySettings)); // false
+// 4. Print each result without repeating console.log statements
+for (const user of testUsers) {
+  console.log(`User ${user.id}:`, isNotified(user));
+}
