@@ -17,6 +17,7 @@
   "homepage": "https://github.com/timsheldon1/qa-bootcamp-week2-starter#readme",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.65.1"
+    "@playwright/test": "^1.65.1",
+    "dotenv": "^18.0.10"
   }
 }

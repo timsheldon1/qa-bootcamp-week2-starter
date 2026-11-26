@@ -1,17 +1,7 @@
 
 import { test, expect } from '@playwright/test';
 
-const apiUrl = 'https://api.practicesoftwaretesting.com';
-
-test('products API returns a list of products', async ({ request }) => {
-  const response = await request.get(`${apiUrl}/products`);
-
-  expect(response.status()).toBe(200);
-
-  const body = await response.json();
-
-  expect(body.data[0]).toHaveProperty('name');
-});
+const apiUrl = process.env.API_URL ?? 'https://api.practicesoftwaretesting.com';
 
 test('creates a cart and adds a product', async ({ request }) => {
   let cartId: string | undefined;
@@ -27,6 +17,11 @@ test('creates a cart and adds a product', async ({ request }) => {
     const productsResponse = await request.get(`${apiUrl}/products`);
     expect(productsResponse.status()).toBe(200);
     const products = await productsResponse.json();
+    expect(products.data.length).toBeGreaterThan(0);
+    expect(products.data[0]).toMatchObject({
+      id: expect.any(String),
+      name: expect.any(String),
+    });
     const productId = products.data[0].id;
     expect(productId).toEqual(expect.any(String));
 
