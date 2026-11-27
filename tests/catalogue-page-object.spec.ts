@@ -7,6 +7,8 @@ test('catalogue page object returns search results for the search term', async (
   await cataloguePage.open();
   await cataloguePage.searchFor('pliers');
 
+  await expect(cataloguePage.searchResultsSummary).toContainText(/products found for 'pliers'/i);
+
   const productCount = await cataloguePage.productNames.count();
   expect(productCount).toBeGreaterThan(0);
 
