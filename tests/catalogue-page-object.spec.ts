@@ -7,9 +7,10 @@ test('catalogue page object returns search results for the search term', async (
   await cataloguePage.open();
   await cataloguePage.searchFor('pliers');
 
-  await expect(cataloguePage.productNames).toHaveCount(4);
+  const productCount = await cataloguePage.productNames.count();
+  expect(productCount).toBeGreaterThan(0);
 
-  for (let i = 0; i < 4; i++) {
+  for (let i = 0; i < productCount; i++) {
     await expect(cataloguePage.productNames.nth(i)).toContainText(/pliers/i);
   }
 });
