@@ -15,7 +15,7 @@ export class CataloguePage {
   }
 
   async open() {
-    await this.page.goto('https://practicesoftwaretesting.com/');
+    await this.page.goto('/');
   }
 
   async searchFor(product: string) {

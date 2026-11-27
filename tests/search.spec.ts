@@ -1,16 +1,16 @@
-
 import { test, expect } from '@playwright/test';
-import { CataloguePage } from '../pages/CataloguePage';
 
 test('search results contain the search term', async ({ page }) => {
-  const cataloguePage = new CataloguePage(page);
+  await page.goto('/');
 
-  await cataloguePage.open();
-  await cataloguePage.searchFor('pliers');
+  await page.getByRole('textbox').fill('pliers');
+  await page.getByRole('button', { name: 'Search' }).click();
 
-  await expect(cataloguePage.productNames).toHaveCount(4);
+  const productNames = page.locator('[data-test^="product-"] h5');
 
-  for (let i = 0; i < 4; i++) {
-    await expect(cataloguePage.productNames.nth(i)).toContainText(/pliers/i);
+  await expect(productNames).toHaveCount(4);
+
+  for (let i = 0; i < await productNames.count(); i++) {
+    await expect(productNames.nth(i)).toContainText(/pliers/i);
   }
 });
